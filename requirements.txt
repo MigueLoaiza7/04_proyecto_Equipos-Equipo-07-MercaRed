@@ -1,0 +1,4 @@
+# Núcleo del laboratorio: SOLO biblioteca estándar de Python 3.10+.
+# Dependencias opcionales (el laboratorio funciona sin ellas):
+psutil>=5.9      # CPU %, memoria residente, frecuencia, sensores
+matplotlib>=3.7  # gráficos de la Clase 5

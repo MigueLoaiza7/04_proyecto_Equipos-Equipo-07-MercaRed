@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+# Los datos generados se reconstruyen con src/generar_datos.py (son grandes)
+datos/*.csv
+datos/*.log
+# Los resultados SÍ se versionan: son evidencia
+!resultados/*.csv
