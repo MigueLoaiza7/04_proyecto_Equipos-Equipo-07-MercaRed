@@ -24,11 +24,16 @@ _¿Cómo cambia ________ (VD, unidad) cuando ________ (VI), manteniendo ________
 Ver [docs/hipotesis.md](docs/hipotesis.md).
 
 ## 5. Estrategias
-| Id | Estrategia | Idea principal | Efecto físico esperado | Responsable |
+| Id | Estrategia | Idea principal | Resultado esperado | Estado |
 |---|---|---|---|---|
-| A | Línea base | (situación inicial) | — | R2 |
-| B | | | | R3 |
-| C | | | | R3 |
+| A | Línea base | Inserción y búsqueda lineal | Referencia correcta | Implementada |
+| B | Pendiente | Alternativa por asignar | Comparación futura | Pendiente |
+| C | Índice directo | Diccionario código -> producto | Evitar ordenamiento y recorridos lineales | Implementada |
+
+La Estrategia C construye un índice de código a producto y usa cada consulta
+como clave de búsqueda. No modifica el catálogo recibido ni requiere ordenar
+los datos. Su costo principal es recorrer el catálogo una vez para construir el
+índice y almacenar una referencia adicional por producto.
 
 ## 6. Cómo reproducir
 ```bash
@@ -39,6 +44,9 @@ python -m unittest discover -s pruebas                   # corrección
 python -m experimentos.ejecutar_experimento              # experimento formal -> resultados/resultados.csv
 python ruta/a/analizar_resultados.py resultados/resultados.csv
 ```
+
+En Windows se puede usar `C:\Python314\python.exe` si el alias `python` no está
+configurado.
 
 ## 7. Integrantes y roles
 | Rol | Integrante | Responsabilidad principal |
@@ -56,3 +64,31 @@ Los roles son flexibles: **todos** participan en la comprensión física y en el
 
 ## 9. Resultados y conclusiones (Clase 5)
 _Resumen de máximo 5 líneas con cifras, unidades e intervalo de confianza._
+
+### Estrategia C
+
+Ejecución formal real completada el 18-11-2026 en Windows 10 con CPython
+3.14.7, AMD64 y 8 núcleos lógicos. Se midieron A y C con 10 repeticiones de
+tiempo por tamaño y una corrida separada de memoria por combinación.
+
+| n | A media (s) | C media (s) | C memoria (MiB) |
+|---|---:|---:|---:|
+| 1 000 | 0.042791 | 0.000128 | 0.054 |
+| 2 000 | 0.162089 | 0.000238 | 0.106 |
+| 4 000 | 0.662829 | 0.000468 | 0.212 |
+
+La media de C fue aproximadamente 334 veces menor que A en n=1 000, 681 veces
+en n=2 000 y 1 416 veces en n=4 000. Al duplicar n, C pasó de 0.000128 s a
+0.000238 s y luego a 0.000468 s, crecimiento cercano a 2×, compatible con
+construcción lineal del índice dentro del rango medido. C usó 0.054, 0.106 y
+0.212 MiB, aproximadamente 6×, 6.24× y 6.63× la memoria trazada de A.
+
+Los resultados se consideran reales únicamente cuando aparecen en
+`resultados/resultados.csv`, generado por el experimento. Las corridas con
+`tracemalloc` están separadas de las mediciones de tiempo y no deben
+interpretarse como tiempos normales.
+
+Las hipótesis y variables están documentadas en
+[docs/hipotesis.md](docs/hipotesis.md) y
+[docs/variables.md](docs/variables.md). Sin RAPL, vatímetro o medición eléctrica
+equivalente no se afirma consumo o ahorro energético.

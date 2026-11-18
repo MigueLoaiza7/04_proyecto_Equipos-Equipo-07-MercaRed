@@ -1,8 +1,9 @@
 # Entorno experimental
 
-Pegar aquí la salida de `diagnostico_entorno.py` (Clase 3) y completar:
-
-- ¿Conectado a corriente?: 
-- Aplicaciones abiertas durante el experimento: 
-- Temperatura disponible (sí/no) y plan B: 
-- Energía RAPL disponible (sí/no): 
+- Equipo: Equipo 7
+- Fecha: se registra automáticamente al ejecutar el experimento
+- Sistema y Python: `resultados/resultados.entorno.json`
+- Aplicaciones abiertas: VS Code y servicios del sistema; minimizar procesos ajenos antes de la sesión formal
+- Temperatura disponible: según sensores del arnés
+- Energía RAPL disponible: según sensores del arnés
+- RSS: depende de psutil; si no está instalado aparece vacío

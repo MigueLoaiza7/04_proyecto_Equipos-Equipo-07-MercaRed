@@ -2,8 +2,8 @@
 
 | Tipo | Variable | Símbolo | Unidad | Valores / rango | Instrumento o forma de obtención | Justificación |
 |---|---|---|---|---|---|---|
-| Independiente | Estrategia | — | — | A, B, C | — | |
-| Independiente | Tamaño de entrada | n | elementos | | — | |
+| Independiente | Estrategia | — | — | A_linea_base, C_indice_directo | módulo registrado en el experimento | |
+| Independiente | Tamaño de entrada | n | elementos | 1 000, 2 000, 4 000 | preparar(n) con semilla 7 | el rango permite observar crecimiento sin sobrepasar el laboratorio |
 | Dependiente | Tiempo de ejecución | t | s | — | time.perf_counter() | |
 | Dependiente | Pico de memoria | M | MiB | — | tracemalloc (corrida separada) | |
 | Dependiente | Uso de CPU | U | % | — | t_CPU / t | |
