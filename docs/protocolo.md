@@ -4,6 +4,11 @@
 
 ## 1. Objetivo del experimento
 
+Medir de forma reproducible la corrección y el costo de la Estrategia A:
+ordenamiento por inserción y búsqueda lineal. La línea base existe, se mantiene
+como referencia y permite validar que toda ejecución alternativa produzca
+el mismo número de consultas encontradas.
+
 ## 2. Preparación del entorno (antes de cada sesión)
 1. Equipo conectado a corriente; perfil de energía "equilibrado" (anotar).
 2. Cerrar navegador, editores pesados y sincronizadores de archivos.
@@ -19,9 +24,17 @@
 | 4 | (Opcional) monitoreo | `python herramientas/... monitor_sistema.py` en otra terminal | `resultados/monitor.csv` |
 
 ## 4. Parámetros
-- Tamaños n: — Justificación:
-- Repeticiones por combinación: — Justificación:
-- Calentamiento: — Orden: aleatorio con semilla 42
+- Tamaños n: 1 000, 2 000 y 4 000. Justificación: cubren crecimiento de escala
+  dentro de los límites de duración del entorno estudiantil.
+- Repeticiones por combinación: 10. La prueba rápida usa 2 repeticiones.
+- Calentamiento: una ejecución no registrada por estrategia/tamaño inicial.
+- Orden: plan barajado con `random.Random(42)`.
+- Semilla de datos: 7.
+- Preparación: `preparar(n)` se ejecuta una vez por tamaño antes del cronómetro.
+- Caché: ejecución posterior al calentamiento; se considera caché caliente
+  por la ausencia de reinicios del proceso.
+- Memoria: cada caso se registra una corrida separada con repetición 0 y
+  `tracemalloc`; no se compara su tiempo inflado con las corridas normales.
 
 ## 5. Criterios de calidad de los datos
 - CV ≤ 10 % por combinación; si se supera: _(acción)_.

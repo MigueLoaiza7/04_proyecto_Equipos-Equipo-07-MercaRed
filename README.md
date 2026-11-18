@@ -1,58 +1,118 @@
 # Equipo 7 — Algoritmos de búsqueda y ordenamiento
 
-> Proyecto: *Laboratorio colaborativo de rendimiento y eficiencia computacional desde la física aplicada*
-> Física Aplicada al Desarrollo de Software · SENA · ADSO · 7.º trimestre
+Proyecto: *Laboratorio colaborativo de rendimiento y eficiencia computacional desde la física aplicada*
 
-## 1. Problema empresarial
-**Empresa (caso simulado):** MercaRed Colombia, tienda en línea con catálogo en crecimiento
+Física Aplicada al Desarrollo de Software · SENA · ADSO · 7.º trimestre
 
-Con 5 000 productos la actualización del catálogo tardaba segundos; con 50 000 tarda varios minutos. La gerencia pregunta cuánto tardará con 500 000.
+## Problema empresarial
 
-## 2. Situación inicial medible
-src/linea_base.py ordena por inserción y busca cada código linealmente.
+MercaRed Colombia gestiona un catálogo que creció de 5 000 a 50 000 productos.
+La gerencia necesita estimar el costo de atender el catálogo y las consultas
+cuando llegue a 500 000 registros.
 
-| Medición preliminar (Clase 3) | Valor | Unidad |
-|---|---|---|
-| n utilizado | | registros |
-| Tiempo de ejecución (1 corrida) | | s |
-| Equipo y fecha | | — |
+## Estrategia A implementada
 
-## 3. Pregunta de investigación
-_¿Cómo cambia ________ (VD, unidad) cuando ________ (VI), manteniendo ________ (VC)?_
+La estrategia A corresponde a la línea base identificada por la rama
+`Estrategia-A` y por la tabla original del proyecto:
 
-## 4. Hipótesis
-Ver [docs/hipotesis.md](docs/hipotesis.md).
+- Ordenamiento por inserción: `src/estrategia_a.py`
+- Búsqueda lineal por código sobre el catálogo ya ordenado
+- Resultado equivalente a la línea base: número de consultas encontradas
+- Complejidad esperada: ordenamiento cercano a O(n²) y búsqueda lineal O(n)
+  por consulta, según el estado y distribución de los datos
 
-## 5. Estrategias
-| Id | Estrategia | Idea principal | Efecto físico esperado | Responsable |
-|---|---|---|---|---|
-| A | Línea base | (situación inicial) | — | R2 |
-| B | | | | R3 |
-| C | | | | R3 |
+La implementación conserva `preparar(n)` y `ejecutar(datos)`. `preparar(n)`
+genera datos fuera del cronómetro y `ejecutar(datos)` contiene el trabajo medido.
 
-## 6. Cómo reproducir
-```bash
-python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt                          # opcional: psutil, matplotlib
-python -m src.linea_base                                 # situación inicial
-python -m unittest discover -s pruebas                   # corrección
-python -m experimentos.ejecutar_experimento              # experimento formal -> resultados/resultados.csv
-python ruta/a/analizar_resultados.py resultados/resultados.csv
+## Ejecutar
+
+Desde Windows PowerShell, usando el ejecutable real de Python:
+
+```powershell
+C:\Python314\python.exe -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+
+python -m src.linea_base
+python -m unittest discover -s pruebas
+python -m experimentos.ejecutar_experimento --rapido
+python -m experimentos.ejecutar_experimento
 ```
 
-## 7. Integrantes y roles
-| Rol | Integrante | Responsabilidad principal |
-|---|---|---|
-| R1 — Coordinación y protocolo experimental | _(nombre)_ | Mantiene el protocolo y la bitácora de decisiones; controla variables; modera issues y la planeación. |
-| R2 — Desarrollo de estrategia base | _(nombre)_ | Comprende y documenta la línea base; asegura la verificación de corrección (pruebas) de todas las estrategias. |
-| R3 — Estrategias alternativas y optimización | _(nombre)_ | Diseña e implementa las estrategias alternativas y justifica físicamente por qué deberían cambiar las magnitudes. |
-| R4 — Automatización de mediciones y análisis | _(nombre)_ | Automatiza experimentos y registro CSV; produce estadísticas y gráficos; documenta el entorno. |
+La ejecución rápida usa un tamaño y dos repeticiones. La ejecución formal usa
+los tamaños 1 000, 2 000 y 4 000 con diez repeticiones de tiempo y una corrida
+de memoria por caso. El plan se baraja con semilla 42 y los datos con semilla 7.
 
-Los roles son flexibles: **todos** participan en la comprensión física y en el código.
+## Evidencia y medición
 
-## 8. Documentación
-- [Variables](docs/variables.md) · [Protocolo](docs/protocolo.md) · [Entorno](docs/entorno.md)
-- [Decisiones técnicas](docs/decisiones.md) · [Uso de IA](docs/uso_ia.md) · [Informe](docs/informe.md)
+Los resultados se escriben en `resultados/resultados.csv`. Las condiciones del
+proceso y del equipo se escriben junto a él en
+`resultados/resultados.entorno.json`. Las medidas disponibles son:
 
-## 9. Resultados y conclusiones (Clase 5)
-_Resumen de máximo 5 líneas con cifras, unidades e intervalo de confianza._
+- Tiempo de pared: `time.perf_counter()`, en segundos
+- Tiempo de proceso: `time.process_time()`, en segundos
+- Uso de CPU: cociente CPU/pared, en porcentaje
+- Pico Python: `tracemalloc`, en MiB, en corrida separada
+- RSS: memoria residente del proceso, en MiB
+- Frecuencia y temperatura si el sistema las expone
+
+No se afirma ahorro energético: RAPL o vatímetro no están disponibles de forma
+garantizada y el porcentaje de CPU no representa potencia eléctrica.
+
+## Pregunta e hipótesis
+
+¿Cómo cambia el tiempo de ejecución y la memoria de A cuando crece `n`,
+manteniendo semilla, equipo, consultas y versión de Python?
+
+Las hipótesis verificables están en [docs/hipotesis.md](docs/hipotesis.md).
+Variables y controles están en [docs/variables.md](docs/variables.md); el
+procedimiento completo está en [docs/protocolo.md](docs/protocolo.md).
+
+## Estado de los resultados
+
+La existencia de un CSV indica medición real, no una simulación. Los campos
+vacíos de frecuencia, temperatura o energía significan que el sensor no estaba
+disponible y no deben sustituirse por estimaciones. El entorno usado se resume
+en [docs/entorno.md](docs/entorno.md) y el JSON generado conserva el detalle
+de máquina y Python.
+
+Los resultados obtenidos no deben extrapolarse a 500 000 productos sin medir
+ese rango. Para publicar una conclusión definitiva deben existir las
+mediciones formales y la revisión en pull request.
+
+### Medición formal real ejecutada
+
+La ejecución formal terminó el 18-11-2026 en Windows 10 con CPython 3.14.7,
+AMD64 y 8 núcleos lógicos. El CSV contiene 30 corridas de tiempo y 3 corridas
+separadas de memoria. Las medias reales fueron:
+
+| n | Tiempo medio de pared (s) | Mediana (s) | Pico Python (MiB) |
+|---|---:|---:|---:|
+| 1 000 | 0.046132 | 0.044608 | 0.009 |
+| 2 000 | 0.206951 | 0.190294 | 0.017 |
+| 4 000 | 0.724332 | 0.702276 | 0.032 |
+
+Al duplicar de 1 000 a 2 000 registros, el tiempo medio creció aproximadamente
+4.49 veces; al duplicar de 2 000 a 4 000, aproximadamente 3.50 veces. Esto es
+compatible con un crecimiento superlineal dentro del rango medido, pero no
+permite afirmar una pendiente cuadrática exacta con tres puntos ni extrapolar
+a 500 000. Los picos medidos con `tracemalloc` fueron 0.009, 0.017 y 0.032 MiB.
+Frecuencia, temperatura, RSS con `psutil` y energía RAPL no estuvieron
+disponibles; sus campos aparecen vacíos y no se estimaron.
+
+## Documentación
+
+- [Hipótesis](docs/hipotesis.md)
+- [Variables](docs/variables.md)
+- [Protocolo](docs/protocolo.md)
+- [Entorno](docs/entorno.md)
+- [Decisiones técnicas](docs/decisiones.md)
+- [Uso de IA](docs/uso_ia.md)
+- [Informe](docs/informe.md)
+
+## Integración colaborativa
+
+El trabajo de Estrategia-A se desarrolla en una rama separada y debe integrarse
+mediante pull request hacia `main`. Antes del merge se deben ejecutar pruebas,
+prueba de humo y revisión del CSV; otro integrante debe comprobar que los
+archivos documentados corresponden a las ejecuciones reales.
