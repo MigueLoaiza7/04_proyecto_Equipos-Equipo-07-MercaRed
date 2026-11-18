@@ -5,7 +5,7 @@ Una estrategia más rápida pero incorrecta NO es una mejora.
 import unittest
 
 from experimentos.ejecutar_experimento import ESTRATEGIAS
-from src import linea_base
+from src import estrategia_c, linea_base
 
 
 class TestCorreccion(unittest.TestCase):
@@ -55,6 +55,36 @@ class TestCorreccion(unittest.TestCase):
                 with self.subTest(estrategia=nombre, caso=indice):
                     esperado = linea_base.ejecutar(datos)
                     self.assertEqual(estrategia.ejecutar(datos), esperado)
+
+    def test_estrategia_c_igual_a_base(self):
+        casos = [
+            linea_base.preparar(300),
+            ([(3, "Tres", 3.0), (1, "Uno", 1.0)], [1, 3, 7, 1]),
+            ([], [1, -1]),
+        ]
+
+        for indice, datos in enumerate(casos):
+            with self.subTest(caso=indice):
+                self.assertEqual(
+                    estrategia_c.ejecutar(datos),
+                    linea_base.ejecutar(datos),
+                )
+
+    def test_estrategia_c_no_modifica_catalogo(self):
+        d = linea_base.preparar(300)
+        datos_originales = (list(d[0]), list(d[1]))
+
+        estrategia_c.ejecutar(d)
+
+        self.assertEqual(d, datos_originales)
+
+    def test_indice_directo_encuentra_codigo(self):
+        catalogo = [(3, "Tres", 3.0), (1, "Uno", 1.0)]
+        indice = estrategia_c.construir_indice(catalogo)
+
+        self.assertEqual(estrategia_c.buscar_indirecto(indice, 3), catalogo[0])
+        self.assertIsNone(estrategia_c.buscar_indirecto(indice, 7))
+        self.assertEqual(estrategia_c.construir_indice([]), {})
 
 
 if __name__ == "__main__":
