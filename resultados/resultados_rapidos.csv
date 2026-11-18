@@ -1,0 +1,7 @@
+marca_tiempo,equipo,estrategia,n,repeticion,tiempo_s,cpu_proceso_s,uso_cpu_pct,pico_mem_mib,rss_mib,frecuencia_mhz,temperatura_c,energia_j,potencia_w,medicion_memoria,observacion
+2026-11-18T10:35:45.201,Equipo 7,C_indice_directo,1000,1,0.000174,0.000000,0.0,,,,,,,no,
+2026-11-18T10:35:45.209,Equipo 7,C_indice_directo,1000,0,0.000204,0.000000,0.0,0.054,,,,,,si,corrida de memoria
+2026-11-18T10:35:45.282,Equipo 7,A_linea_base,1000,2,0.066809,0.062500,93.5,,,,,,,no,
+2026-11-18T10:35:45.290,Equipo 7,C_indice_directo,1000,2,0.000172,0.000000,0.0,,,,,,,no,
+2026-11-18T10:35:45.352,Equipo 7,A_linea_base,1000,1,0.055936,0.062500,111.7,,,,,,,no,
+2026-11-18T10:35:45.542,Equipo 7,A_linea_base,1000,0,0.181117,0.171875,94.9,0.009,,,,,,si,corrida de memoria

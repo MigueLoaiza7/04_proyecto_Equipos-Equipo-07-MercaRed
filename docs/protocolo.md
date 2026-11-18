@@ -4,6 +4,9 @@
 
 ## 1. Objetivo del experimento
 
+Comparar la línea base A con la Estrategia C de índice directo mediante
+tiempo de pared, CPU, memoria Python y RSS disponible.
+
 ## 2. Preparación del entorno (antes de cada sesión)
 1. Equipo conectado a corriente; perfil de energía "equilibrado" (anotar).
 2. Cerrar navegador, editores pesados y sincronizadores de archivos.
@@ -19,9 +22,12 @@
 | 4 | (Opcional) monitoreo | `python herramientas/... monitor_sistema.py` en otra terminal | `resultados/monitor.csv` |
 
 ## 4. Parámetros
-- Tamaños n: — Justificación:
-- Repeticiones por combinación: — Justificación:
-- Calentamiento: — Orden: aleatorio con semilla 42
+- Tamaños n: 1 000, 2 000 y 4 000. Justificación: rango ejecutable y comparable en el laboratorio.
+- Repeticiones por combinación: 10 de tiempo; prueba rápida usa 2.
+- Calentamiento: una ejecución no registrada por módulo y tamaño.
+- Orden: plan barajado con random.Random(42).
+- Datos: semilla fija 7.
+- Preparación fuera del cronómetro; memoria con trazado separado.
 
 ## 5. Criterios de calidad de los datos
 - CV ≤ 10 % por combinación; si se supera: _(acción)_.
