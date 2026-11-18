@@ -16,9 +16,9 @@ Una hipótesis verificable **predice un resultado medible** y **puede resultar f
 ## Hipótesis del equipo
 | Id | Hipótesis completa | VI | VD (unidad) | Predicción cuantitativa | Mecanismo físico | ¿Cómo la refutaríamos? |
 |---|---|---|---|---|---|---|
-| H1 | | | | | | |
-| H2 | | | | | | |
-| H3 | | | | | | |
+| H1 | Si se usa Estrategia C en lugar de A con el mismo n, entonces el tiempo de pared disminuirá, porque C construye un diccionario una vez y resuelve consultas por clave en lugar de ordenar por inserción y buscar linealmente; manteniendo datos, equipo y semilla | estrategia y n | tiempo (s) | Menor tiempo para C en el rango medido | Operaciones por clave y número de comparaciones | Si C no es sistemáticamente más rápida por la dispersión observada, la hipótesis se refuta |
+| H2 | Si se duplica n en Estrategia C, entonces el tiempo crecerá aproximadamente de forma lineal, porque construir el índice recorre una vez el catálogo y las consultas se acceden por clave | n | tiempo (s) | Entre 1.5× y 3× al duplicar n | Recorrido lineal del catálogo | Pendiente log-log muy distinta de 1 dentro del rango medido |
+| H3 | Si se usa Estrategia C, entonces el pico de memoria Python puede ser mayor que en A por almacenar el diccionario adicional | estrategia y n | pico Python (MiB) | C usa memoria adicional proporcional a n | Una clave y referencia por producto en el índice | Si no se observa crecimiento aproximadamente lineal o C no usa más memoria en el rango medido |
 
 ## Lista de verificación
 - [ ] Tiene dirección (aumenta/disminuye) y una magnitud aproximada.
