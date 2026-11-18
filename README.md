@@ -9,13 +9,18 @@
 Con 5 000 productos la actualización del catálogo tardaba segundos; con 50 000 tarda varios minutos. La gerencia pregunta cuánto tardará con 500 000.
 
 ## 2. Situación inicial medible
-src/linea_base.py ordena por inserción y busca cada código linealmente.
+`src/linea_base.py` ordena por inserción y busca cada código linealmente. Primera
+evidencia obtenida con `python -m src.linea_base`:
 
-| Medición preliminar (Clase 3) | Valor | Unidad |
-|---|---|---|
-| n utilizado | | registros |
-| Tiempo de ejecución (1 corrida) | | s |
-| Equipo y fecha | | — |
+| n (registros) | Consultas encontradas | Tiempo (1 corrida, s) |
+|---:|---:|---:|
+| 1.000 | 80 | 0,046 |
+| 2.000 | 149 | 0,218 |
+| 4.000 | 318 | 1,251 |
+
+**Equipo y fecha:** AMD Ryzen 5 PRO 2400G with Radeon Vega Graphics · Windows 10
+· Python 3.12.10 · 2026-11-18. Son mediciones preliminares de una corrida por
+tamaño, no resultados estadísticos.
 
 ## 3. Pregunta de investigación
 _¿Cómo cambia ________ (VD, unidad) cuando ________ (VI), manteniendo ________ (VC)?_
@@ -39,6 +44,13 @@ python -m unittest discover -s pruebas                   # corrección
 python -m experimentos.ejecutar_experimento              # experimento formal -> resultados/resultados.csv
 python ruta/a/analizar_resultados.py resultados/resultados.csv
 ```
+
+Las pruebas validan la línea base y comparan cada estrategia registrada en
+`ESTRATEGIAS` con ella usando datos reproducibles y casos límite. Registra una
+estrategia alternativa en `experimentos/ejecutar_experimento.py` para incluirla
+automáticamente en esta verificación. En la rama `Estrategia-B` consultada,
+todavía no hay módulo B registrado; su corrección queda pendiente de integrar
+y probar cuando esté disponible.
 
 ## 7. Integrantes y roles
 | Rol | Integrante | Responsabilidad principal |
