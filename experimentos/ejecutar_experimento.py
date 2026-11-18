@@ -15,17 +15,14 @@ import random
 from pathlib import Path
 
 from herramientas.labmedicion import Experimento, calentar
-from src import linea_base
-# TODO (R3): importar los módulos de las estrategias alternativas
-# from src import estrategia_b, estrategia_c
+from src import estrategia_a, linea_base
 
 ESTRATEGIAS = {
-    "A_linea_base": linea_base,
-    # TODO (R3): "B_...": estrategia_b,
-    # TODO (R3): "C_...": estrategia_c,
+    "A_linea_base": estrategia_a,
 }
 
-# TODO (R1): justificar en docs/protocolo.md la elección de tamaños y repeticiones
+# Tamaños acotados para permitir una ejecución formal completa en equipos
+# estudiantiles. La extrapolación fuera de este rango queda documentada.
 TAMANOS = [1_000, 2_000, 4_000]
 REPETICIONES = 10
 

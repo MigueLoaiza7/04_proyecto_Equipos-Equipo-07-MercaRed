@@ -1,0 +1,4 @@
+marca_tiempo,equipo,estrategia,n,repeticion,tiempo_s,cpu_proceso_s,uso_cpu_pct,pico_mem_mib,rss_mib,frecuencia_mhz,temperatura_c,energia_j,potencia_w,medicion_memoria,observacion
+2026-11-18T10:09:19.785,Equipo 7,A_linea_base,1000,2,0.041502,0.046875,112.9,,,,,,,no,
+2026-11-18T10:09:19.842,Equipo 7,A_linea_base,1000,1,0.052425,0.046875,89.4,,,,,,,no,
+2026-11-18T10:09:20.022,Equipo 7,A_linea_base,1000,0,0.171442,0.171875,100.3,0.009,,,,,,si,corrida de memoria
