@@ -10,7 +10,7 @@ Cada decisión importante se registra aquí y se enlaza desde el issue o PR corr
 - **Justificación:** El índice elimina el ordenamiento por inserción y evita recorridos lineales para las consultas.
 - **Consecuencias / riesgos:** Consume memoria adicional proporcional a n y no debe confundirse el tamaño teórico promedio con una garantía de tiempo constante en todas las cargas.
 
-## D-001 — _(título)_
+## D-002 — _(título)_
 - **Fecha:** · **Autor(es):** · **Issue/PR:** #
 - **Contexto:** ¿qué problema o pregunta motivó la decisión?
 - **Opciones consideradas:** 1) … 2) … 3) …

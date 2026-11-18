@@ -30,7 +30,11 @@ tiempo de pared, CPU, memoria Python y RSS disponible.
 - Preparación fuera del cronómetro; memoria con trazado separado.
 
 ## 5. Criterios de calidad de los datos
-- CV ≤ 10 % por combinación; si se supera: _(acción)_.
+- CV ≤ 10 % por combinación. Si se supera, revisar las condiciones de medición
+  y el registro de incidentes, sin excluir datos salvo que exista una causa
+  documentada. Realizar una serie adicional de al menos 10 repeticiones bajo
+  condiciones estables y reportar tanto la serie original como la adicional;
+  no sustituir resultados silenciosamente.
 - Valores atípicos (regla de Tukey): se reportan; solo se excluyen con causa documentada.
 
 ## 6. Registro de incidentes

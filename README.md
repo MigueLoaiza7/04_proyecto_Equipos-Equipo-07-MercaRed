@@ -9,13 +9,18 @@
 Con 5 000 productos la actualización del catálogo tardaba segundos; con 50 000 tarda varios minutos. La gerencia pregunta cuánto tardará con 500 000.
 
 ## 2. Situación inicial medible
-src/linea_base.py ordena por inserción y busca cada código linealmente.
+`src/linea_base.py` ordena por inserción y busca cada código linealmente. Primera
+evidencia obtenida con `python -m src.linea_base`:
 
-| Medición preliminar (Clase 3) | Valor | Unidad |
-|---|---|---|
-| n utilizado | | registros |
-| Tiempo de ejecución (1 corrida) | | s |
-| Equipo y fecha | | — |
+| n (registros) | Consultas encontradas | Tiempo (1 corrida, s) |
+|---:|---:|---:|
+| 1.000 | 80 | 0,046 |
+| 2.000 | 149 | 0,218 |
+| 4.000 | 318 | 1,251 |
+
+**Equipo y fecha:** AMD Ryzen 5 PRO 2400G with Radeon Vega Graphics · Windows 10
+· Python 3.12.10 · 2026-11-18. Son mediciones preliminares de una corrida por
+tamaño, no resultados estadísticos.
 
 ## 3. Pregunta de investigación
 _¿Cómo cambia ________ (VD, unidad) cuando ________ (VI), manteniendo ________ (VC)?_
@@ -45,8 +50,12 @@ python -m experimentos.ejecutar_experimento              # experimento formal ->
 python ruta/a/analizar_resultados.py resultados/resultados.csv
 ```
 
-En Windows se puede usar `C:\Python314\python.exe` si el alias `python` no está
-configurado.
+Las pruebas validan la línea base y comparan cada estrategia registrada en
+`ESTRATEGIAS` con ella usando datos reproducibles y casos límite. Registra una
+estrategia alternativa en `experimentos/ejecutar_experimento.py` para incluirla
+automáticamente en esta verificación. La Estrategia B algorítmica sigue
+pendiente; el rol del Integrante B es mantener la línea base y verificar la
+corrección de las alternativas implementadas por el equipo.
 
 ## 7. Integrantes y roles
 | Rol | Integrante | Responsabilidad principal |
@@ -70,6 +79,11 @@ _Resumen de máximo 5 líneas con cifras, unidades e intervalo de confianza._
 Ejecución formal real completada el 18-11-2026 en Windows 10 con CPython
 3.14.7, AMD64 y 8 núcleos lógicos. Se midieron A y C con 10 repeticiones de
 tiempo por tamaño y una corrida separada de memoria por combinación.
+
+Estas mediciones de A y C se realizaron en el mismo entorno y son la
+comparación formal. Las mediciones preliminares de la sección 2 se ejecutaron
+con Python 3.12.10 y en otro equipo; no deben compararse directamente con estos
+resultados.
 
 | n | A media (s) | C media (s) | C memoria (MiB) |
 |---|---:|---:|---:|
