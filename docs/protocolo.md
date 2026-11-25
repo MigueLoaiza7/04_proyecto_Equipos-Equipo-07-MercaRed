@@ -8,10 +8,26 @@ Comparar la línea base A con la Estrategia C de índice directo mediante
 tiempo de pared, CPU, memoria Python y RSS disponible.
 
 ## 2. Preparación del entorno (antes de cada sesión)
-1. Equipo conectado a corriente; perfil de energía "equilibrado" (anotar).
-2. Cerrar navegador, editores pesados y sincronizadores de archivos.
+1. Registrar fecha y hora de inicio, y si el equipo está conectado a corriente.
+   Si hay un instrumento para medir corriente, anotar lectura, unidad e
+   instrumento; si no, marcarla como no disponible.
+2. Registrar el perfil de energía realmente seleccionado y los programas
+   abiertos al iniciar la medición. Después, cerrar navegador, editores
+   pesados y sincronizadores de archivos que no formen parte del entorno
+   controlado; anotar cualquier programa que deba permanecer abierto.
 3. Ejecutar `diagnostico_entorno.py` y guardar la salida en `docs/entorno.md`.
 4. Generar datos con semilla fija: `python -m src.generar_datos <n>`.
+
+| Dato de la sesión | Valor |
+|---|---|
+| Fecha/hora de inicio y zona horaria | Por registrar antes de la próxima sesión |
+| Conexión a corriente; lectura de corriente, unidad e instrumento si disponibles | Por registrar; no inferir de sesiones anteriores |
+| Perfil de energía | Por registrar antes de la próxima sesión |
+| Programas abiertos al inicio y los que permanecen durante la prueba | Por registrar antes de la próxima sesión |
+
+No completar estos campos con valores supuestos. La medición del 18-11-2026
+no registró programas abiertos ni condiciones de alimentación; esos datos
+permanecen desconocidos.
 
 ## 3. Procedimiento
 | Paso | Acción | Comando | Evidencia |

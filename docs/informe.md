@@ -12,7 +12,9 @@ directo con diccionario) con catálogos de 1 000, 2 000 y 4 000 productos. Se
 midieron diez tiempos por combinación y una corrida separada de memoria.
 Windows 10 y CPython 3.14.7. C fue entre 334× y 1 416× más rápida en los
 tamaños medidos, usando entre 6.00× y 6.63× más memoria trazada. No se
-extrapola a 500 000 ni se afirma ahorro energético.
+midió directamente n=500 000 ni se afirma ahorro energético. Una extrapolación
+log-log exploratoria de A para ese tamaño se presenta con sus limitaciones en
+la sección 7.
 
 ## 1. Introducción
 
@@ -132,7 +134,8 @@ Ver [atipicos.csv](../resultados/atipicos.csv).
 
 Las razones de crecimiento de A fueron 3.79× y 4.09× en tiempo al duplicar n,
 consistentes con crecimiento superlineal en este intervalo. No se infiere una
-pendiente log-log precisa con tres puntos ni se extrapola a 500 000.
+ley asintótica a partir de tres puntos. Para responder la pregunta de 500 000,
+la sección 7 presenta una estimación exploratoria, no una predicción validada.
 
 ## 6. Explicación física/computacional
 
@@ -164,6 +167,19 @@ lotes de ejecuciones de C para superar el límite de resolución, registrar
 memoria RSS y repetir memoria. Riesgos: memoria del diccionario, colisiones y
 actualización del índice cuando cambia el catálogo; si hay códigos duplicados,
 la implementación actual conserva el último producto de ese código.
+
+### Estimación de A para 500 000 productos
+
+Un ajuste lineal de log(tiempo medio) frente a log(n), usando las medias de A
+en n=1 000, 2 000 y 4 000, da una pendiente aproximada de 1,977 y estima
+9 134 s (2,54 h) para n=500 000. No se ejecutó A a ese tamaño. La estimación
+extrapola 125× más allá del mayor tamaño medido y presupone que la tendencia
+log-log observada continúa; puede fallar por cambios de caché, memoria,
+intercambio a disco, sistema operativo u otras condiciones. Sirve solo para
+planificación y no incluye incertidumbre estadística del modelo, energía ni
+memoria. Se recomienda reportarla como estimación y realizar una medición
+directa solo si la actividad la exige explícitamente, tras acordar la sesión y
+registrar las condiciones del [protocolo](protocolo.md).
 
 ## 8. Conclusiones
 

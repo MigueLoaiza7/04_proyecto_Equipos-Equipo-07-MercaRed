@@ -97,7 +97,23 @@ su tiempo creció 1.86× y 1.97× al duplicar n. La memoria medida de C fue
 aproximadamente 6.00×, 6.24× y 6.63× la de A. Se recomienda probar C para
 consultas si el incremento de memoria es aceptable; medir 50 000 y 500 000
 antes de planear capacidad. Frecuencia, temperatura y energía no estuvieron
-disponibles: no se afirma ahorro energético ni se extrapola tiempo a 500 000.
+disponibles: no se afirma ahorro energético ni se extrapola energía.
+
+**Pregunta de 500 000 productos (estimación, no medición):** un ajuste log-log
+de las medias de A para n=1 000, 2 000 y 4 000 estima 9 134 s (2,54 h). Es una
+extrapolación 125× por encima del mayor n medido y supone que se mantiene la
+tendencia observada; no es una duración garantizada ni evidencia sobre memoria
+o energía. No se ejecutó A con 500 000 productos. Se reporta la estimación y
+se reserva una medición directa para el caso de que la actividad la exija
+explícitamente y se acuerde su programación.
+
+**Próxima medición de A:** R1 coordina el protocolo y registra el entorno;
+R4 prepara y ejecuta la medición y conserva sus resultados. Antes de empezar
+se deben registrar fecha/hora, conexión a corriente (y lectura de corriente
+solo si hay instrumento), perfil de energía y programas abiertos. Estos datos
+no quedaron registrados en la medición del 18-11-2026 y no se reconstruyen a
+posteriori. La coordinación corresponde a la [issue #1](https://github.com/MigueLoaiza7/04_proyecto_Equipos-Equipo-07-MercaRed/issues/1);
+los valores de la próxima sesión siguen pendientes.
 
 El resumen, atípicos, auditoría de campos y gráficos se reproducen con
 `python -m experimentos.analizar_resultados resultados/resultados.csv`.
