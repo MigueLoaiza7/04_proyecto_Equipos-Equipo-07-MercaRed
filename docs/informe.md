@@ -190,6 +190,20 @@ observados, pero no queda demostrada fuera del rango. Los CV y atípicos se
 reportan sin eliminar datos; la instrumentación de tiempo/CPU requiere mejorar
 para ejecuciones submilisegundo. No hay evidencia de ahorro energético.
 
+### Nota separada: serie 3 controlada A/B/C
+
+La serie 3 del 25-11-2026 usa CPython 3.12.10 y no se combina con la medición
+histórica de este informe, realizada con CPython 3.14.7. En el análisis de las
+tres series A/B/C, todas las nueve combinaciones de estrategia y tamaño
+mantuvieron CV combinado >10 %. Para A, los CV fueron 16,07 %, 18,34 % y
+19,11 % en n=1 000, 2 000 y 4 000. La tercera serie se tomó bajo las condiciones
+controladas registradas en [entorno.md](entorno.md), pero la dispersión
+combinada sigue siendo una limitación: los resultados son exploratorios y no
+justifican repetir la medición automáticamente. Una corrida adicional solo
+tendría sentido con una condición concreta identificada y un plan de control
+documentado de antemano. El resumen de las tres series está en el
+[registro de análisis A/B/C](https://github.com/MigueLoaiza7/04_proyecto_Equipos-Equipo-07-MercaRed/blob/c411d194ea61e3b59b8b67bba8572556e2109b21/resultados/resumen_estadistico_A_B_C.csv).
+
 ## 9. Referencias y artefactos
 
 - CSV fuente: [resultados.csv](../resultados/resultados.csv)

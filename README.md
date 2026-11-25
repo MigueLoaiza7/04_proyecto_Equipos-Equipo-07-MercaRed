@@ -107,13 +107,24 @@ o energía. No se ejecutó A con 500 000 productos. Se reporta la estimación y
 se reserva una medición directa para el caso de que la actividad la exija
 explícitamente y se acuerde su programación.
 
-**Próxima medición de A:** R1 coordina el protocolo y registra el entorno;
-R4 prepara y ejecuta la medición y conserva sus resultados. Antes de empezar
-se deben registrar fecha/hora, conexión a corriente (y lectura de corriente
-solo si hay instrumento), perfil de energía y programas abiertos. Estos datos
-no quedaron registrados en la medición del 18-11-2026 y no se reconstruyen a
-posteriori. La coordinación corresponde a la [issue #1](https://github.com/MigueLoaiza7/04_proyecto_Equipos-Equipo-07-MercaRed/issues/1);
-los valores de la próxima sesión siguen pendientes.
+**Serie 3 controlada A/B/C (25-11-2026):** se registró a las 10:45:27
+(zona horaria no indicada), en Windows 10 con CPython 3.12.10. A/R1 confirmó
+manualmente conexión a corriente, perfil equilibrado y cierre de procesos
+pesados. El registro no enumera las aplicaciones cerradas ni anota una lectura
+de corriente. Tampoco contiene un incidente específico; esto significa “sin
+incidentes registrados”, no confirma que no ocurrieran. Esta serie es
+independiente de las mediciones históricas A/C del 18-11-2026 con CPython
+3.14.7.
+
+Al combinar las tres series, el CV permaneció por encima del 10 % en las nueve
+combinaciones de estrategia y tamaño; para A fue 16,07 %, 18,34 % y 19,11 %
+en n=1 000, 2 000 y 4 000. Se reporta la limitación y se consideran los
+resultados exploratorios. No se ejecutó otra corrida después de la serie 3:
+una serie adicional solo procede si se identifica y documenta antes una
+condición concreta que se controlará.
+El registro y coordinación se realizan en la [issue #3](https://github.com/MigueLoaiza7/04_proyecto_Equipos-Equipo-07-MercaRed/issues/3);
+el detalle del entorno está en [docs/entorno.md](docs/entorno.md) y el criterio
+para una eventual repetición en [docs/protocolo.md](docs/protocolo.md).
 
 El resumen, atípicos, auditoría de campos y gráficos se reproducen con
 `python -m experimentos.analizar_resultados resultados/resultados.csv`.

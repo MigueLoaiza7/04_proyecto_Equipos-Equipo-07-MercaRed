@@ -20,14 +20,17 @@ tiempo de pared, CPU, memoria Python y RSS disponible.
 
 | Dato de la sesión | Valor |
 |---|---|
-| Fecha/hora de inicio y zona horaria | Por registrar antes de la próxima sesión |
-| Conexión a corriente; lectura de corriente, unidad e instrumento si disponibles | Por registrar; no inferir de sesiones anteriores |
-| Perfil de energía | Por registrar antes de la próxima sesión |
-| Programas abiertos al inicio y los que permanecen durante la prueba | Por registrar antes de la próxima sesión |
+| Fecha/hora de inicio y zona horaria | Registrar antes de cualquier sesión futura aprobada |
+| Conexión a corriente; lectura de corriente, unidad e instrumento si disponibles | Registrar antes de cualquier sesión futura aprobada |
+| Perfil de energía | Registrar antes de cualquier sesión futura aprobada |
+| Programas abiertos al inicio y los que permanecen durante la prueba | Registrar antes de cualquier sesión futura aprobada |
 
 No completar estos campos con valores supuestos. La medición del 18-11-2026
 no registró programas abiertos ni condiciones de alimentación; esos datos
-permanecen desconocidos.
+permanecen desconocidos. La serie 3 del 25-11-2026 se ejecutó en condiciones
+controladas; el registro disponible confirma conexión a corriente, perfil
+equilibrado y cierre general de procesos pesados, pero no enumera aplicaciones
+ni confirma incidentes. Ver el registro separado en [entorno.md](entorno.md).
 
 ## 3. Procedimiento
 | Paso | Acción | Comando | Evidencia |
@@ -50,6 +53,11 @@ permanecen desconocidos.
   incidentes y valores individuales, calcular Tukey y reportar ambos resultados.
 - No borrar datos sin una causa verificable y documentada; si no hay causa,
   conservar todas las repeticiones y declarar la limitación.
+- La serie 3 controlada ya se realizó. El CV combinado de las tres series
+  permanece >10 % en las nueve combinaciones A/B/C y n; se debe informar como
+  limitación y tratar los resultados como exploratorios. No ejecutar otra
+  serie automáticamente: solo considerar una nueva corrida si antes se
+  identifica una condición concreta que se controlará y se registra su plan.
 - Aplicación a `resultados.csv`: A n=1 000 y C en los tres tamaños superaron
   CV=10 %. Tukey marcó A n=4 000 repetición 1, C n=2 000 repetición 4 y
   C n=4 000 repetición 3. No se hallaron incidentes registrados en la bitácora,
@@ -61,3 +69,6 @@ permanecen desconocidos.
 ## 6. Registro de incidentes
 | Fecha/hora | Incidente (p. ej. actualización del SO, batería) | Corridas afectadas | Decisión |
 |---|---|---|---|
+
+Para la serie 3 no se registró un incidente específico. La ausencia de una
+anotación no se interpreta como confirmación de que no ocurriera ninguno.
