@@ -158,7 +158,7 @@ def escribir_svg_comparacion(ruta, resumen, estrategias, tamano):
     ruta.write_text("\n".join(lineas), encoding="utf-8")
 
 
-def analizar(entrada, directorio):
+def analizar(entrada, directorio, estrategia_foco=None):
     with entrada.open(newline="", encoding="utf-8-sig") as archivo:
         lector = csv.DictReader(archivo)
         campos = lector.fieldnames or []
@@ -234,8 +234,30 @@ def analizar(entrada, directorio):
 
     estrategias = sorted({fila["estrategia"] for fila in resumen})
     tamanos = sorted({int(fila["n"]) for fila in resumen})
+    if estrategia_foco is not None and estrategia_foco not in estrategias:
+        raise ValueError(f"Estrategia no encontrada en el CSV: {estrategia_foco}")
     escribir_svg_tiempo(directorio / "tiempo_vs_n.svg", resumen, estrategias, tamanos)
     escribir_svg_comparacion(directorio / "comparacion_n_mayor.svg", resumen, estrategias, max(tamanos))
+    estrategias_exportadas = [estrategia_foco] if estrategia_foco else estrategias
+    for estrategia in estrategias_exportadas:
+        slug = estrategia.lower()
+        resumen_estrategia = [fila for fila in resumen if fila["estrategia"] == estrategia]
+        atipicos_estrategia = [fila for fila in atipicos if fila["estrategia"] == estrategia]
+        with (directorio / f"resumen_{slug}.csv").open("w", newline="", encoding="utf-8") as archivo:
+            escritor = csv.DictWriter(archivo, fieldnames=list(resumen_estrategia[0]))
+            escritor.writeheader()
+            escritor.writerows(resumen_estrategia)
+        with (directorio / f"atipicos_{slug}.csv").open("w", newline="", encoding="utf-8") as archivo:
+            columnas = ["estrategia", "n", "repeticion", "tiempo_s", "cv_pct", "limite_tukey_inf_s", "limite_tukey_sup_s"]
+            escritor = csv.DictWriter(archivo, fieldnames=columnas)
+            escritor.writeheader()
+            escritor.writerows(atipicos_estrategia)
+        escribir_svg_tiempo(
+            directorio / f"tiempo_{slug}_vs_n.svg",
+            resumen_estrategia,
+            [estrategia],
+            sorted(int(fila["n"]) for fila in resumen_estrategia),
+        )
     return {
         "rows": filas,
         "columns": campos,
@@ -251,8 +273,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("csv", nargs="?", default="resultados/resultados.csv")
     parser.add_argument("--salida", default="resultados")
+    parser.add_argument("--estrategia", help="Exporta además salidas individuales solo para esta estrategia")
     argumentos = parser.parse_args()
-    resultado = analizar(Path(argumentos.csv), Path(argumentos.salida))
+    resultado = analizar(Path(argumentos.csv), Path(argumentos.salida), argumentos.estrategia)
     print(f"Filas: {len(resultado['rows'])} (tiempo={resultado['timing_count']}, memoria={resultado['memory_count']})")
     print(f"Columnas: {', '.join(resultado['columns'])}")
     print(f"Atipicos Tukey: {len(resultado['outliers'])}")

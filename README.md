@@ -67,37 +67,39 @@ Los roles son flexibles: **todos** participan en la comprensión física y en el
 - [Variables](docs/variables.md) · [Protocolo](docs/protocolo.md) · [Entorno](docs/entorno.md)
 - [Decisiones técnicas](docs/decisiones.md) · [Uso de IA](docs/uso_ia.md) · [Informe](docs/informe.md)
 
-## 9. Resultados y conclusiones (Clase 5)
+## 9. Resultados y conclusiones — Estrategia C
 
-**Medición real:** Windows 10, CPython 3.14.7, 8 núcleos lógicos; 10 tiempos
-por grupo y una corrida de memoria aparte. En 1 000, 2 000 y 4 000 productos,
-C midió 336×, 682× y 1 416× menos tiempo medio que A. A 4 000, C tardó
-0.000468 s (IC 95 %: 0.000421–0.000515) frente a 0.662829 s
-(0.638150–0.687509) de A. El pico Python de C fue 0.212 MiB contra 0.032 MiB
-de A. Las mediciones no estiman rendimiento a 500 000 ni energía.
+Esta entrega tiene etiqueta propia `v1.0-estrategia-c`; la etiqueta existente
+`v1.0` se conserva en su commit de Estrategia-A.
 
-| n | A media s (IC 95 %) | CV A | Memoria A MiB | C media s (IC 95 %) | CV C | Memoria C MiB |
-|---:|---:|---:|---:|---:|---:|---:|
-| 1 000 | 0.042791 (0.039586–0.045996) | 10.47 % | 0.009 | 0.000128 (0.000115–0.000140) | 13.86 % | 0.054 |
-| 2 000 | 0.162089 (0.153431–0.170747) | 7.47 % | 0.017 | 0.000238 (0.000204–0.000271) | 19.76 % | 0.106 |
-| 4 000 | 0.662829 (0.638150–0.687509) | 5.21 % | 0.032 | 0.000468 (0.000421–0.000515) | 14.17 % | 0.212 |
+**Enfoque C:** índice hash de código a producto. En 10 repeticiones por
+tamaño, el tiempo medio creció de 0.000128 s (n=1 000) a 0.000468 s
+(n=4 000); en cada n, el IC 95 % de C no se solapa con el de A. Al
+duplicar n, el tiempo creció 1.86× y 1.97×, compatible con el costo esperado
+O(n) de construir el índice con q=n/10 consultas. El pico Python pasó de
+0.054 a 0.212 MiB; solo hubo una medición de memoria por tamaño.
 
-Los CV superiores a 10 % se investigaron; tres corridas cumplen el criterio
-Tukey de atípico. Como el protocolo no registra incidentes que expliquen esos
-casos, no se eliminaron ni se les asignó una causa. El informe y el detalle se
-encuentran en [docs/informe.md](docs/informe.md), [resultados/resumen.csv](resultados/resumen.csv)
-y [resultados/atipicos.csv](resultados/atipicos.csv).
+| n | Tiempo medio C (s) | IC 95 % (s) | CV | Pico Python (MiB) |
+|---:|---:|---:|---:|---:|
+| 1 000 | 0.0001275 | 0.0001149–0.0001401 | 13.86 % | 0.054 |
+| 2 000 | 0.0002377 | 0.0002041–0.0002713 | 19.76 % | 0.106 |
+| 4 000 | 0.0004680 | 0.0004206–0.0005154 | 14.17 % | 0.212 |
 
-![Tiempo contra n, log-log e IC 95 %](resultados/tiempo_vs_n.svg)
+![Estrategia C: tiempo frente a n, log-log e IC 95 %](resultados/tiempo_c_indice_directo_vs_n.svg)
 
-![Comparación A/C en n mayor e IC 95 %](resultados/comparacion_n_mayor.svg)
+Como referencia, en n=4 000 A tomó 0.662829 s y C 0.000468 s (1 416× menos
+tiempo medio), pero C usó 6.63× más memoria trazada (0.212 frente a 0.032
+MiB). Esta sección evalúa específicamente C; el detalle está en
+[docs/informe.md](docs/informe.md),
+[resultados/resumen_c_indice_directo.csv](resultados/resumen_c_indice_directo.csv)
+y [resultados/atipicos_c_indice_directo.csv](resultados/atipicos_c_indice_directo.csv).
 
-Las hipótesis de tiempo se apoyan dentro del rango medido: C es más rápida y
-su tiempo creció 1.86× y 1.97× al duplicar n. La memoria medida de C fue
-aproximadamente 6.00×, 6.24× y 6.63× la de A. Se recomienda probar C para
-consultas si el incremento de memoria es aceptable; medir 50 000 y 500 000
-antes de planear capacidad. Frecuencia, temperatura y energía no estuvieron
-disponibles: no se afirma ahorro energético ni se extrapola tiempo a 500 000.
+En C, los tres CV superaron 10 %. Tukey marcó una corrida en n=2 000 y otra en
+n=4 000; no se borraron datos porque el protocolo no registra causas. La CPU
+de proceso marcó 0.000000 s en las corridas submilisegundo; frecuencia,
+temperatura y energía no estuvieron disponibles. No se afirma ahorro
+energético ni se extrapola a 500 000: se recomienda validar con lotes y medir
+memoria antes de dimensionar producción.
 
-El resumen, atípicos, auditoría de campos y gráficos se reproducen con
-`python -m experimentos.analizar_resultados resultados/resultados.csv`.
+Reproducir el análisis completo y exportar archivos individuales solo para C:
+`python -m experimentos.analizar_resultados resultados/resultados.csv --estrategia C_indice_directo`.

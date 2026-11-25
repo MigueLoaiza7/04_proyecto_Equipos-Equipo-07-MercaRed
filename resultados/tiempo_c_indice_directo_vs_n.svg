@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450" y="30" text-anchor="middle" font-family="sans-serif" font-size="19">Tiempo de pared vs. n (escala log-log)</text>
+<path d="M 105 70 V 470 H 855" fill="none" stroke="#333"/>
+<text x="500" y="535" text-anchor="middle" font-family="sans-serif" font-size="15">Tamano n (productos), escala logaritmica</text>
+<text x="25" y="300" transform="rotate(-90 25 300)" text-anchor="middle" font-family="sans-serif" font-size="15">Tiempo (s), media e IC 95%</text>
+<path d="M 105.00 70 V 470" stroke="#ddd"/>
+<text x="105.00" y="495" text-anchor="middle" font-family="sans-serif" font-size="12">1000</text>
+<path d="M 480.00 70 V 470" stroke="#ddd"/>
+<text x="480.00" y="495" text-anchor="middle" font-family="sans-serif" font-size="12">2000</text>
+<path d="M 855.00 70 V 470" stroke="#ddd"/>
+<text x="855.00" y="495" text-anchor="middle" font-family="sans-serif" font-size="12">4000</text>
+<path d="M 105.00 375.10 V 413.91 M 100.00 375.10 H 110.00 M 100.00 413.91 H 110.00" stroke="#d04a35" stroke-width="2"/>
+<circle cx="105.00" cy="393.54" r="4" fill="#d04a35"/>
+<path d="M 480.00 246.30 V 301.80 M 475.00 246.30 H 485.00 M 475.00 301.80 H 485.00" stroke="#d04a35" stroke-width="2"/>
+<circle cx="480.00" cy="272.08" r="4" fill="#d04a35"/>
+<path d="M 855.00 121.16 V 160.83 M 850.00 121.16 H 860.00 M 850.00 160.83 H 860.00" stroke="#d04a35" stroke-width="2"/>
+<circle cx="855.00" cy="139.99" r="4" fill="#d04a35"/>
+<polyline points="105.00,393.54 480.00,272.08 855.00,139.99" fill="none" stroke="#d04a35" stroke-width="2"/>
+<path d="M 105 55 H 130" stroke="#d04a35" stroke-width="3"/>
+<text x="137" y="60" font-family="sans-serif" font-size="13">C_indice_directo</text>
+</svg>

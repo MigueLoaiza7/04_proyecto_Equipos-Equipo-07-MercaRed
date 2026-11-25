@@ -54,6 +54,14 @@ class TestAnalizarResultados(unittest.TestCase):
             self.assertTrue((salida / "tiempo_vs_n.svg").exists())
             self.assertTrue((salida / "comparacion_n_mayor.svg").exists())
             self.assertTrue((salida / "auditoria_datos.csv").exists())
+            self.assertTrue((salida / "resumen_a.csv").exists())
+            self.assertTrue((salida / "atipicos_c.csv").exists())
+            self.assertTrue((salida / "tiempo_c_vs_n.svg").exists())
+
+            solo_c = Path(temporal) / "solo_c"
+            analizar(entrada, solo_c, estrategia_foco="C")
+            self.assertTrue((solo_c / "resumen_c.csv").exists())
+            self.assertFalse((solo_c / "resumen_a.csv").exists())
 
 
 if __name__ == "__main__":
