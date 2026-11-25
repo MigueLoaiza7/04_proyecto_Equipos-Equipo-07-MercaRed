@@ -1,6 +1,6 @@
 # Protocolo experimental reproducible
 
-**Responsable:** R1 · **Revisado por:** todos · **Versión:** 1 · **Fecha:**
+**Responsables:** Integrante A (R1/R4) · **Revisado por:** Integrantes B y C · **Versión:** 1 · **Fecha:**
 
 ## 1. Objetivo del experimento
 
@@ -21,8 +21,9 @@ memoria Python y RSS disponible.
 | 2 | Prueba de humo | `python -m experimentos.ejecutar_experimento --rapido` | CSV |
 | 3 | Primera serie formal | `python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie1.csv` | CSV y entorno JSON |
 | 4 | Serie adicional si CV > 10 % | `python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie2.csv --observacion "serie adicional CV"` | CSV y entorno JSON separados |
-| 5 | Análisis y gráficos | `python -m experimentos.analizar_resultados resultados/resultados_A_B_C_serie1.csv resultados/resultados_A_B_C_serie2.csv` | CSV resumen y dos PNG |
-| 6 | (Opcional) monitoreo | `python herramientas/... monitor_sistema.py` en otra terminal | `resultados/monitor.csv` |
+| 5 | Serie controlada tras CV alto | `python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie3.csv --observacion "serie controlada"` | CSV y entorno JSON separados |
+| 6 | Análisis y gráficos | `python -m experimentos.analizar_resultados resultados/resultados_A_B_C_serie1.csv resultados/resultados_A_B_C_serie2.csv resultados/resultados_A_B_C_serie3.csv` | CSV resumen y dos PNG |
+| 7 | (Opcional) monitoreo | `python herramientas/... monitor_sistema.py` en otra terminal | `resultados/monitor.csv` |
 
 ## 4. Parámetros
 - Tamaños n: 1 000, 2 000 y 4 000. Justificación: rango ejecutable y comparable en el laboratorio.
@@ -38,8 +39,9 @@ memoria Python y RSS disponible.
   documentada. Ejecutar una serie adicional de 10 repeticiones en un CSV
   separado con `--observacion "serie adicional CV"`, y reportar ambas series
   y el resumen combinado; no sustituir resultados silenciosamente. Si el CV
-  permanece sobre el umbral, declarar los resultados exploratorios y repetir
-  en una sesión mejor controlada.
+  permanece sobre el umbral tras repetir en condiciones controladas, declarar
+  los resultados exploratorios y describir las limitaciones; no añadir series
+  sin registrar qué condición se busca controlar.
 - Valores atípicos (regla de Tukey): se reportan; solo se excluyen con causa documentada.
 
 ## 6. Registro de incidentes

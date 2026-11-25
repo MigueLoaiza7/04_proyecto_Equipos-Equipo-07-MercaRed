@@ -44,7 +44,8 @@ python -m unittest discover -s pruebas                   # corrección
 python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie1.csv
 # Si el CV supera 10 %, conservar la primera serie y repetir en archivo separado:
 python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie2.csv --observacion "serie adicional CV"
-python -m experimentos.analizar_resultados resultados/resultados_A_B_C_serie1.csv resultados/resultados_A_B_C_serie2.csv
+python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie3.csv --observacion "serie controlada"
+python -m experimentos.analizar_resultados resultados/resultados_A_B_C_serie1.csv resultados/resultados_A_B_C_serie2.csv resultados/resultados_A_B_C_serie3.csv
 ```
 
 El resumen incluye media, desviación estándar, CV, IC95 % y pendiente log-log.
@@ -54,10 +55,10 @@ Los gráficos se generan en `resultados/grafico_tiempo_loglog.png` y
 ## 7. Integrantes y roles
 | Rol | Integrante | Responsabilidad principal |
 |---|---|---|
-| R1 — Coordinación y protocolo experimental | _(nombre)_ | Mantiene el protocolo y la bitácora de decisiones; controla variables; modera issues y la planeación. |
-| R2 — Desarrollo de estrategia base | _(nombre)_ | Comprende y documenta la línea base; asegura la verificación de corrección (pruebas) de todas las estrategias. |
-| R3 — Estrategias alternativas y optimización | _(nombre)_ | Diseña e implementa las estrategias alternativas y justifica físicamente por qué deberían cambiar las magnitudes. |
-| R4 — Automatización de mediciones y análisis | _(nombre)_ | Automatiza experimentos y registro CSV; produce estadísticas y gráficos; documenta el entorno. |
+| R1 — Coordinación y protocolo experimental | Integrante A | Mantiene el protocolo y la bitácora de decisiones; controla variables; modera issues y la planeación. |
+| R2 — Desarrollo de estrategia base | Integrante B | Comprende y documenta la línea base; asegura la verificación de corrección (pruebas) de todas las estrategias. |
+| R3 — Estrategias alternativas y optimización | Integrantes B y C | Diseñan e implementan estrategias alternativas y justifican sus efectos. |
+| R4 — Automatización de mediciones y análisis | Integrantes A y C | Automatizan experimentos y registro CSV; producen estadísticas y gráficos; documentan el entorno. |
 
 Los roles son flexibles: **todos** participan en la comprensión física y en el código.
 
@@ -66,10 +67,11 @@ Los roles son flexibles: **todos** participan en la comprensión física y en el
 - [Decisiones técnicas](docs/decisiones.md) · [Uso de IA](docs/uso_ia.md) · [Informe](docs/informe.md)
 
 ## 9. Resultados y conclusiones (Clase 5)
-Resumen: en las dos series A/B/C del 25-11-2026 (20 tiempos combinados por
+Resumen: en las tres series A/B/C del 25-11-2026 (30 tiempos combinados por
 estrategia/tamaño), B y C tuvieron menores tiempos medios que A entre 1 000 y
-4 000 productos. Las CV combinadas aún exceden 10 %, por lo que los resultados
-son preliminares; detalles, intervalos y limitaciones están en
+4 000 productos. Una tercera serie controlada mejoró algunas combinaciones,
+pero todas las CV combinadas aún exceden 10 %; los resultados siguen siendo
+exploratorios. Detalles, intervalos y limitaciones están en
 [docs/informe.md](docs/informe.md). No se extrapola a 500 000 productos.
 
 ### Estrategia C
@@ -94,10 +96,11 @@ en n=2 000 y 1 416 veces en n=4 000. Al duplicar n, C pasó de 0.000128 s a
 construcción lineal del índice dentro del rango medido. C usó 0.054, 0.106 y
 0.212 MiB, aproximadamente 6×, 6.24× y 6.63× la memoria trazada de A.
 
-Los resultados se consideran reales únicamente cuando aparecen en
-`resultados/resultados.csv`, generado por el experimento. Las corridas con
-`tracemalloc` están separadas de las mediciones de tiempo y no deben
-interpretarse como tiempos normales.
+Estos datos históricos se conservan en `resultados/resultados.csv`. La
+comparación A/B/C de noviembre 25 está en los tres CSV de serie y en
+`resultados/resumen_estadistico_A_B_C.csv`. Las corridas con `tracemalloc`
+están separadas de las mediciones de tiempo y no deben interpretarse como
+tiempos normales.
 
 Las hipótesis y variables están documentadas en
 [docs/hipotesis.md](docs/hipotesis.md) y
