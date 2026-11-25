@@ -9,9 +9,10 @@
 - Sensores: `psutil` no instalado; frecuencia, temperatura, RSS y energía no disponibles.
 - Datos: semilla fija 7; preparación fuera del cronómetro.
 - Series: 10 repeticiones por combinación en cada CSV; la segunda se ejecutó por CV > 10 % y la tercera bajo condiciones controladas.
-- Archivos de entorno completos: `resultados/resultados_A_B_C_serie1.entorno.json` y
-  `resultados/resultados_A_B_C_serie2.entorno.json` y
-  `resultados/resultados_A_B_C_serie3.entorno.json`.
+- Archivos de entorno completos:
+  - `resultados/resultados_A_B_C_serie1.entorno.json`
+  - `resultados/resultados_A_B_C_serie2.entorno.json`
+  - `resultados/resultados_A_B_C_serie3.entorno.json`
 
 Las mediciones de tiempo A/B/C se ejecutaron con el mismo equipo, versión de
 Python, datos y protocolo. Las condiciones de control de la serie 3 se anotaron

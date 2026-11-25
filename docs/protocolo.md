@@ -9,9 +9,14 @@ mezcla y búsqueda binaria) y C (índice directo) mediante tiempo de pared, CPU,
 memoria Python y RSS disponible.
 
 ## 2. Preparación del entorno (antes de cada sesión)
-1. Equipo conectado a corriente; perfil de energía "equilibrado" (anotar).
-2. Cerrar navegador, editores pesados y sincronizadores de archivos.
-3. Ejecutar `diagnostico_entorno.py` y guardar la salida en `docs/entorno.md`.
+1. **Integrante A (R1/R4)** prepara el equipo conectado a corriente, selecciona
+   el perfil de energía equilibrado y cierra navegador, editores pesados y
+   sincronizadores de archivos.
+2. A registra fecha/hora, perfil, aplicaciones abiertas y cualquier incidente
+   en `docs/entorno.md`; envía esa confirmación a **Integrante C (R3/R4)** antes
+   de la corrida. No completar estos datos por suposición.
+3. C verifica que los tamaños, semillas y versión de código sigan el protocolo,
+   usa una ruta CSV nueva y conserva el CSV y el JSON de entorno.
 4. Generar datos con semilla fija: `python -m src.generar_datos <n>`.
 
 ## 3. Procedimiento
@@ -47,3 +52,7 @@ memoria Python y RSS disponible.
 ## 6. Registro de incidentes
 | Fecha/hora | Incidente (p. ej. actualización del SO, batería) | Corridas afectadas | Decisión |
 |---|---|---|---|
+
+Integrante A registra los incidentes y condiciones físicas; Integrante C integra
+ese registro con las mediciones, estadísticas y figuras en su rama. B (R2/R3)
+verifica la corrección antes de abrir o actualizar un PR.
