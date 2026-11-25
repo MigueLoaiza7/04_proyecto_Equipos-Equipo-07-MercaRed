@@ -5,9 +5,6 @@ Construye un diccionario que relaciona cada codigo con su producto. Las
 consultas se resuelven mediante acceso directo por clave.
 """
 
-from src.linea_base import preparar
-
-
 def construir_indice(catalogo):
     return {producto[0]: producto for producto in catalogo}
 

@@ -27,26 +27,29 @@ Ver [docs/hipotesis.md](docs/hipotesis.md).
 | Id | Estrategia | Idea principal | Resultado esperado | Estado |
 |---|---|---|---|---|
 | A | Línea base | Inserción y búsqueda lineal | Referencia correcta | Implementada |
-| B | Pendiente | Alternativa por asignar | Comparación futura | Pendiente |
+| B | Mezcla + búsqueda binaria | Ordena por código y busca por intervalo | Menor crecimiento del trabajo que A; memoria auxiliar adicional | Implementada |
 | C | Índice directo | Diccionario código -> producto | Evitar ordenamiento y recorridos lineales | Implementada |
 
-La Estrategia C construye un índice de código a producto y usa cada consulta
-como clave de búsqueda. No modifica el catálogo recibido ni requiere ordenar
-los datos. Su costo principal es recorrer el catálogo una vez para construir el
-índice y almacenar una referencia adicional por producto.
+La Estrategia B ordena una copia del catálogo con mezcla iterativa y resuelve
+las consultas con búsqueda binaria. La Estrategia C construye un índice de
+código a producto y usa cada consulta como clave; no modifica el catálogo
+recibido, pero almacena una referencia adicional por producto.
 
 ## 6. Cómo reproducir
 ```bash
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt                          # opcional: psutil, matplotlib
+pip install -r requirements.txt                          # matplotlib para gráficos; psutil es opcional
 python -m src.linea_base                                 # situación inicial
 python -m unittest discover -s pruebas                   # corrección
-python -m experimentos.ejecutar_experimento              # experimento formal -> resultados/resultados.csv
-python ruta/a/analizar_resultados.py resultados/resultados.csv
+python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie1.csv
+# Si el CV supera 10 %, conservar la primera serie y repetir en archivo separado:
+python -m experimentos.ejecutar_experimento --salida resultados/resultados_A_B_C_serie2.csv --observacion "serie adicional CV"
+python -m experimentos.analizar_resultados resultados/resultados_A_B_C_serie1.csv resultados/resultados_A_B_C_serie2.csv
 ```
 
-En Windows se puede usar `C:\Python314\python.exe` si el alias `python` no está
-configurado.
+El resumen incluye media, desviación estándar, CV, IC95 % y pendiente log-log.
+Los gráficos se generan en `resultados/grafico_tiempo_loglog.png` y
+`resultados/grafico_estrategias_n_mayor.png`.
 
 ## 7. Integrantes y roles
 | Rol | Integrante | Responsabilidad principal |
@@ -63,9 +66,17 @@ Los roles son flexibles: **todos** participan en la comprensión física y en el
 - [Decisiones técnicas](docs/decisiones.md) · [Uso de IA](docs/uso_ia.md) · [Informe](docs/informe.md)
 
 ## 9. Resultados y conclusiones (Clase 5)
-_Resumen de máximo 5 líneas con cifras, unidades e intervalo de confianza._
+Resumen: en las dos series A/B/C del 25-11-2026 (20 tiempos combinados por
+estrategia/tamaño), B y C tuvieron menores tiempos medios que A entre 1 000 y
+4 000 productos. Las CV combinadas aún exceden 10 %, por lo que los resultados
+son preliminares; detalles, intervalos y limitaciones están en
+[docs/informe.md](docs/informe.md). No se extrapola a 500 000 productos.
 
 ### Estrategia C
+
+Los resultados A/C de noviembre 18 son históricos y corresponden a CPython
+3.14.7; no se mezclan con la nueva comparación A/B/C ejecutada con CPython
+3.12.10.
 
 Ejecución formal real completada el 18-11-2026 en Windows 10 con CPython
 3.14.7, AMD64 y 8 núcleos lógicos. Se midieron A y C con 10 repeticiones de

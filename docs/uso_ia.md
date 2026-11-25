@@ -6,6 +6,7 @@ verificar todo lo que la IA produce y de poder explicarlo sin ella.**
 | # | Fecha | Integrante | Herramienta | Propósito (investigar, depurar, alternativas...) | Consulta (resumen) | ¿Qué se usó de la respuesta? | ¿Cómo se verificó? | Errores o suposiciones detectadas en la respuesta |
 |---|---|---|---|---|---|---|---|---|
 | 1 | 2026-11-18 | Equipo 7 / Copilot SDK | Copilot SDK en VS Code | Implementar, medir y documentar Estrategia C | Definir índice directo y compararlo con A | módulo, pruebas y actualización del experimento/documentación | Ejecutar unittest, prueba rápida y experimento formal | Verificar que el uso de clave coincide con el código base y que no se afirman garantías físicas sin medición |
+| 2 | 2026-11-25 | MigueLoaiza7 (Integrante C) | Copilot SDK en VS Code | Implementar tercera estrategia y apoyar análisis | Ordenamiento por mezcla, búsqueda binaria y comparación A/B/C | Módulo, pruebas, mediciones reproducibles, resumen estadístico y gráficos | Ejecutar pruebas, prueba rápida, dos series formales y analizar CV/IC95 % | Las dos series conservaron CV > 10 % en varias combinaciones; no se ocultaron ni descartaron muestras |
 
 ## Reflexión individual (Clase 5, una por integrante)
 - **Nombre:**

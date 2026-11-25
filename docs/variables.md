@@ -2,9 +2,10 @@
 
 | Tipo | Variable | Símbolo | Unidad | Valores / rango | Instrumento o forma de obtención | Justificación |
 |---|---|---|---|---|---|---|
-| Independiente | Estrategia | — | — | A_linea_base, C_indice_directo | módulo registrado en el experimento | |
+| Independiente | Estrategia | — | — | A_linea_base, B_mezcla_busqueda_binaria, C_indice_directo | módulo registrado en el experimento | |
 | Independiente | Tamaño de entrada | n | elementos | 1 000, 2 000, 4 000 | preparar(n) con semilla 7 | el rango permite observar crecimiento sin sobrepasar el laboratorio |
 | Dependiente | Tiempo de ejecución | t | s | — | time.perf_counter() | |
+| Dependiente | Pendiente log-log de tiempo vs. n | α | — | — | regresión lineal de ln(t) frente a ln(n) | caracteriza el crecimiento dentro del rango medido |
 | Dependiente | Pico de memoria | M | MiB | — | tracemalloc (corrida separada) | |
 | Dependiente | Uso de CPU | U | % | — | t_CPU / t | |
 | Dependiente (opcional) | Temperatura | θ | °C | — | sensores.py | Plan B si no disponible: |
