@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450" y="30" text-anchor="middle" font-family="sans-serif" font-size="19">Tiempo de pared vs. n (escala log-log)</text>
+<path d="M 105 70 V 470 H 855" fill="none" stroke="#333"/>
+<text x="500" y="535" text-anchor="middle" font-family="sans-serif" font-size="15">Tamano n (productos), escala logaritmica</text>
+<text x="25" y="300" transform="rotate(-90 25 300)" text-anchor="middle" font-family="sans-serif" font-size="15">Tiempo (s), media e IC 95%</text>
+<path d="M 105.00 70 V 470" stroke="#ddd"/>
+<text x="105.00" y="495" text-anchor="middle" font-family="sans-serif" font-size="12">1000</text>
+<path d="M 480.00 70 V 470" stroke="#ddd"/>
+<text x="480.00" y="495" text-anchor="middle" font-family="sans-serif" font-size="12">2000</text>
+<path d="M 855.00 70 V 470" stroke="#ddd"/>
+<text x="855.00" y="495" text-anchor="middle" font-family="sans-serif" font-size="12">4000</text>
+<path d="M 105.00 198.34 V 204.83 M 100.00 198.34 H 110.00 M 100.00 204.83 H 110.00" stroke="#2457a6" stroke-width="2"/>
+<circle cx="105.00" cy="201.46" r="4" fill="#2457a6"/>
+<path d="M 480.00 141.60 V 146.23 M 475.00 141.60 H 485.00 M 475.00 146.23 H 485.00" stroke="#2457a6" stroke-width="2"/>
+<circle cx="480.00" cy="143.85" r="4" fill="#2457a6"/>
+<path d="M 855.00 81.35 V 84.57 M 850.00 81.35 H 860.00 M 850.00 84.57 H 860.00" stroke="#2457a6" stroke-width="2"/>
+<circle cx="855.00" cy="82.93" r="4" fill="#2457a6"/>
+<polyline points="105.00,201.46 480.00,143.85 855.00,82.93" fill="none" stroke="#2457a6" stroke-width="2"/>
+<path d="M 105.00 448.95 V 457.56 M 100.00 448.95 H 110.00 M 100.00 457.56 H 110.00" stroke="#d04a35" stroke-width="2"/>
+<circle cx="105.00" cy="453.04" r="4" fill="#d04a35"/>
+<path d="M 480.00 420.37 V 432.69 M 475.00 420.37 H 485.00 M 475.00 432.69 H 485.00" stroke="#d04a35" stroke-width="2"/>
+<circle cx="480.00" cy="426.09" r="4" fill="#d04a35"/>
+<path d="M 855.00 392.61 V 401.41 M 850.00 392.61 H 860.00 M 850.00 401.41 H 860.00" stroke="#d04a35" stroke-width="2"/>
+<circle cx="855.00" cy="396.79" r="4" fill="#d04a35"/>
+<polyline points="105.00,453.04 480.00,426.09 855.00,396.79" fill="none" stroke="#d04a35" stroke-width="2"/>
+<path d="M 105 55 H 130" stroke="#2457a6" stroke-width="3"/>
+<text x="137" y="60" font-family="sans-serif" font-size="13">A_linea_base</text>
+<path d="M 325 55 H 350" stroke="#d04a35" stroke-width="3"/>
+<text x="357" y="60" font-family="sans-serif" font-size="13">C_indice_directo</text>
+</svg>

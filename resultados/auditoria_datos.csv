@@ -1,0 +1,17 @@
+columna,celdas_vacias,filas
+marca_tiempo,0,66
+equipo,0,66
+estrategia,0,66
+n,0,66
+repeticion,0,66
+tiempo_s,0,66
+cpu_proceso_s,0,66
+uso_cpu_pct,0,66
+pico_mem_mib,60,66
+rss_mib,66,66
+frecuencia_mhz,66,66
+temperatura_c,66,66
+energia_j,66,66
+potencia_w,66,66
+medicion_memoria,0,66
+observacion,60,66
