@@ -9,16 +9,21 @@
 Con 5 000 productos la actualización del catálogo tardaba segundos; con 50 000 tarda varios minutos. La gerencia pregunta cuánto tardará con 500 000.
 
 ## 2. Situación inicial medible
-src/linea_base.py ordena por inserción y busca cada código linealmente.
 
-| Medición preliminar (Clase 3) | Valor | Unidad |
-|---|---|---|
-| n utilizado | | registros |
-| Tiempo de ejecución (1 corrida) | | s |
-| Equipo y fecha | | — |
+`src/linea_base.py` ordena por inserción y busca cada código linealmente.
+Medición formal de A (10 tiempos por caso):
+
+| Tamaño n | Tiempo medio A | Unidad | Equipo y fecha |
+|---:|---:|---|---|
+| 1 000 | 0.042791 | s | Windows 10 / CPython 3.14.7, 18-11-2026 |
+| 2 000 | 0.162089 | s | Windows 10 / CPython 3.14.7, 18-11-2026 |
+| 4 000 | 0.662829 | s | Windows 10 / CPython 3.14.7, 18-11-2026 |
 
 ## 3. Pregunta de investigación
-_¿Cómo cambia ________ (VD, unidad) cuando ________ (VI), manteniendo ________ (VC)?_
+
+¿Cómo cambian el tiempo de pared (s) y el pico de memoria Python (MiB) al
+reemplazar A por C y aumentar n, manteniendo el mismo equipo, versión de
+Python, datos y consultas?
 
 ## 4. Hipótesis
 Ver [docs/hipotesis.md](docs/hipotesis.md).
@@ -42,7 +47,7 @@ pip install -r requirements.txt                          # opcional: psutil, mat
 python -m src.linea_base                                 # situación inicial
 python -m unittest discover -s pruebas                   # corrección
 python -m experimentos.ejecutar_experimento              # experimento formal -> resultados/resultados.csv
-python ruta/a/analizar_resultados.py resultados/resultados.csv
+python -m experimentos.analizar_resultados resultados/resultados.csv
 ```
 
 En Windows se puede usar `C:\Python314\python.exe` si el alias `python` no está
@@ -63,32 +68,36 @@ Los roles son flexibles: **todos** participan en la comprensión física y en el
 - [Decisiones técnicas](docs/decisiones.md) · [Uso de IA](docs/uso_ia.md) · [Informe](docs/informe.md)
 
 ## 9. Resultados y conclusiones (Clase 5)
-_Resumen de máximo 5 líneas con cifras, unidades e intervalo de confianza._
 
-### Estrategia C
+**Medición real:** Windows 10, CPython 3.14.7, 8 núcleos lógicos; 10 tiempos
+por grupo y una corrida de memoria aparte. En 1 000, 2 000 y 4 000 productos,
+C midió 336×, 682× y 1 416× menos tiempo medio que A. A 4 000, C tardó
+0.000468 s (IC 95 %: 0.000421–0.000515) frente a 0.662829 s
+(0.638150–0.687509) de A. El pico Python de C fue 0.212 MiB contra 0.032 MiB
+de A. Las mediciones no estiman rendimiento a 500 000 ni energía.
 
-Ejecución formal real completada el 18-11-2026 en Windows 10 con CPython
-3.14.7, AMD64 y 8 núcleos lógicos. Se midieron A y C con 10 repeticiones de
-tiempo por tamaño y una corrida separada de memoria por combinación.
+| n | A media s (IC 95 %) | CV A | Memoria A MiB | C media s (IC 95 %) | CV C | Memoria C MiB |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 000 | 0.042791 (0.039586–0.045996) | 10.47 % | 0.009 | 0.000128 (0.000115–0.000140) | 13.86 % | 0.054 |
+| 2 000 | 0.162089 (0.153431–0.170747) | 7.47 % | 0.017 | 0.000238 (0.000204–0.000271) | 19.76 % | 0.106 |
+| 4 000 | 0.662829 (0.638150–0.687509) | 5.21 % | 0.032 | 0.000468 (0.000421–0.000515) | 14.17 % | 0.212 |
 
-| n | A media (s) | C media (s) | C memoria (MiB) |
-|---|---:|---:|---:|
-| 1 000 | 0.042791 | 0.000128 | 0.054 |
-| 2 000 | 0.162089 | 0.000238 | 0.106 |
-| 4 000 | 0.662829 | 0.000468 | 0.212 |
+Los CV superiores a 10 % se investigaron; tres corridas cumplen el criterio
+Tukey de atípico. Como el protocolo no registra incidentes que expliquen esos
+casos, no se eliminaron ni se les asignó una causa. El informe y el detalle se
+encuentran en [docs/informe.md](docs/informe.md), [resultados/resumen.csv](resultados/resumen.csv)
+y [resultados/atipicos.csv](resultados/atipicos.csv).
 
-La media de C fue aproximadamente 334 veces menor que A en n=1 000, 681 veces
-en n=2 000 y 1 416 veces en n=4 000. Al duplicar n, C pasó de 0.000128 s a
-0.000238 s y luego a 0.000468 s, crecimiento cercano a 2×, compatible con
-construcción lineal del índice dentro del rango medido. C usó 0.054, 0.106 y
-0.212 MiB, aproximadamente 6×, 6.24× y 6.63× la memoria trazada de A.
+![Tiempo contra n, log-log e IC 95 %](resultados/tiempo_vs_n.svg)
 
-Los resultados se consideran reales únicamente cuando aparecen en
-`resultados/resultados.csv`, generado por el experimento. Las corridas con
-`tracemalloc` están separadas de las mediciones de tiempo y no deben
-interpretarse como tiempos normales.
+![Comparación A/C en n mayor e IC 95 %](resultados/comparacion_n_mayor.svg)
 
-Las hipótesis y variables están documentadas en
-[docs/hipotesis.md](docs/hipotesis.md) y
-[docs/variables.md](docs/variables.md). Sin RAPL, vatímetro o medición eléctrica
-equivalente no se afirma consumo o ahorro energético.
+Las hipótesis de tiempo se apoyan dentro del rango medido: C es más rápida y
+su tiempo creció 1.86× y 1.97× al duplicar n. La memoria medida de C fue
+aproximadamente 6.00×, 6.24× y 6.63× la de A. Se recomienda probar C para
+consultas si el incremento de memoria es aceptable; medir 50 000 y 500 000
+antes de planear capacidad. Frecuencia, temperatura y energía no estuvieron
+disponibles: no se afirma ahorro energético ni se extrapola tiempo a 500 000.
+
+El resumen, atípicos, auditoría de campos y gráficos se reproducen con
+`python -m experimentos.analizar_resultados resultados/resultados.csv`.

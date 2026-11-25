@@ -30,8 +30,17 @@ tiempo de pared, CPU, memoria Python y RSS disponible.
 - Preparación fuera del cronómetro; memoria con trazado separado.
 
 ## 5. Criterios de calidad de los datos
-- CV ≤ 10 % por combinación; si se supera: _(acción)_.
-- Valores atípicos (regla de Tukey): se reportan; solo se excluyen con causa documentada.
+- Umbral: CV ≤ 10 % por combinación. Si se supera, inspeccionar bitácora de
+  incidentes y valores individuales, calcular Tukey y reportar ambos resultados.
+- No borrar datos sin una causa verificable y documentada; si no hay causa,
+  conservar todas las repeticiones y declarar la limitación.
+- Aplicación a `resultados.csv`: A n=1 000 y C en los tres tamaños superaron
+  CV=10 %. Tukey marcó A n=4 000 repetición 1, C n=2 000 repetición 4 y
+  C n=4 000 repetición 3. No se hallaron incidentes registrados en la bitácora,
+  así que no se excluyó ninguna fila.
+- El tiempo de C está en el orden de 0.1–0.6 ms y `process_time()` registra
+  valores de 0.000000 s en esas corridas. La causa concreta no se aisló; se
+  recomienda medir lotes de ejecuciones para una futura revisión.
 
 ## 6. Registro de incidentes
 | Fecha/hora | Incidente (p. ej. actualización del SO, batería) | Corridas afectadas | Decisión |
